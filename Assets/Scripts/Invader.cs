@@ -5,7 +5,7 @@ public class Invader : MonoBehaviour
     public Sprite[] animationSprites;
     public float animationTime = 1.0f;
     public System.Action killed;
-    public int emir
+    public int emir;
     private SpriteRenderer _spriteRenderer;
     private int _animationFrame;
 
@@ -40,4 +40,5 @@ public class Invader : MonoBehaviour
     }
 
 }
+
 
