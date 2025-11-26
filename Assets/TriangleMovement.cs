@@ -2,50 +2,29 @@ using UnityEngine;
 
 public class TriangleMovement : MonoBehaviour
 {
-    private Vector3 move;
-
-   /* public float forwardforce = 40f;
-    public float sidewayforce = 40f;
-    public Rigidbody2D rb;                        Connected to the rigidbody movement 
-    */
-    void Start()
+    private TriangleActions control;
+    private Rigidbody2D rb;
+    void Awake()
     {
-     /*   if(rb == null) 
-        {
-            rb = this.GetComponent<Rigidbody2d>
-        }
-    */  
+        control = new TriangleActions();
+        control.Player.Jump.performed += Jump;
+        rb = GetComponent<Rigidbody2D>();
     }
 
- 
-    void Update()
+    private void OnEnable()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"))
-
-       // MovePlayer();   //Rigidbody movement     
+        control.Enable();
     }
-    // has been added if wanted to use rigidbody instead
-/*    void MovePlayer()
+
+    private void OnDisable()
     {
-        if(Input.KeyCode.W)
-        {
-            rb.AddForce(0,0,forwardforce * Time.deltatime , ForceMode.VelocityChange)
-        }
+        control.Disable();
+    }   
 
-        if(Input.KeyCode.S)
-        {
-            rb.AddForce(0,0,-forwardforce * Time.deltatime , ForceMode.VelocityChange)    // for rigidbody movement
-        }
-
-        if(Input.KeyCode.A)
-        {
-            rb.AddForce(-sidewayforce * Time.deltatime,0,0 , ForceMode.VelocityChange)
-        }
-
-        if(Input.KeyCode.D)
-        {
-            rb.AddForce(sidewayforce * Time.deltatime ,0,0 , ForceMode.VelocityChange)
-        }
+    void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        Debug.Log("Jumped");
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 10f);
     }
-*/
+
 }
